@@ -1,6 +1,7 @@
 #!/bin/bash
 
 rm -rf release
+rm -rf work
 
 mkdir release
 
@@ -37,11 +38,10 @@ for line in $(cat ../packages); do
 
     head metadata.json -n -3 | head -c -1 >> ../packages.json
 
-
-echo "
-\"download_sha256\": \"$(sha256sum ./${name}.zip | sed -E 's/\s(.*)//;t;d')\",
-\"download_size\": $(du -csb ./${name}.zip | grep total | sed 's/ *\stotal* *\(.*\)/\1/'),
-\"install_size\": $(du -csb ${lib_files} | grep total | sed 's/ *\stotal* *\(.*\)/\1/'),
+echo ",
+\"download_sha256\": \"$(sha256sum ../$name.zip | sed -E 's/\s(.*)//;t;d')\",
+\"download_size\": $(du -csb ../$name.zip | grep total | sed 's/ *\stotal* *\(.*\)/\1/'),
+\"install_size\": $(du -csb $(cat lib-files) | grep total | sed 's/ *\stotal* *\(.*\)/\1/'),
 \"download_url\": \"$url\"" >> ../packages.json
 
     tail metadata.json -n 3 | head -c -1 >> ../packages.json
