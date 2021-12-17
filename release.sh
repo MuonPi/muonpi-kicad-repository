@@ -24,6 +24,7 @@ for line in $(cat ../packages); do
 
     mkdir "./packages/$path"
     wget "$icon" -P "./packages/$path"
+    wget "$url"
    
 
     git clone "https://github.com/MuonPi/$name.git" && cd $name && git checkout $version
@@ -35,10 +36,13 @@ for line in $(cat ../packages); do
     fi
 
     head metadata.json -n -3 | head -c -1 >> ../packages.json
-    
-    echo ",
-$(./release.sh)" >> ../packages.json
-    echo ",\"download_url\": \"$url\"" >> ../packages.json
+
+
+echo "
+\"download_sha256\": \"$(sha256sum ./${name}.zip | sed -E 's/\s(.*)//;t;d')\",
+\"download_size\": $(du -csb ./${name}.zip | grep total | sed 's/ *\stotal* *\(.*\)/\1/'),
+\"install_size\": $(du -csb ${lib_files} | grep total | sed 's/ *\stotal* *\(.*\)/\1/'),
+\"download_url\": \"$url\"" >> ../packages.json
 
     tail metadata.json -n 3 | head -c -1 >> ../packages.json
     cd ..
