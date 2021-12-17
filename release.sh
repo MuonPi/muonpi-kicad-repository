@@ -20,7 +20,7 @@ for line in $(cat ../packages); do
     url="https://github.com/MuonPi/$name/releases/download/$version/$name.zip"
     metadata="https://raw.githubusercontent.com/MuonPi/$name/$version/metadata.json"
     icon="https://raw.githubusercontent.com/MuonPi/$name/$version/resources/icon.png"
-    path="org.github.Muonpi.$name"
+    path="org.github.MuonPi.$name"
     packages="$packages $path"
 
     mkdir "./packages/$path"
