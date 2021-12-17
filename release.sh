@@ -63,14 +63,14 @@ cp ./repository.in.json ./work/repository.json
 echo "	\"packages\": {" >> ./work/repository.json
 echo "		\"sha256\": \"$(sha256sum ./release/packages.json | sed -E 's/\s(.*)//;t;d')\"," >> ./work/repository.json
 echo "		\"update_time_utc\": \"$(date -u +"%F %T")\"," >> ./work/repository.json
-echo "		\"update_timestamp\": \"$(date -u +"%s")\"," >> ./work/repository.json
+echo "		\"update_timestamp\": $(date -u +"%s")," >> ./work/repository.json
 echo "		\"url\": \"https://archive.muonpi.org/kicad/packages.json\"" >> ./work/repository.json
 echo "	}," >> ./work/repository.json
 
 echo "	\"resources\": {" >> ./work/repository.json
 echo "		\"sha256\": \"$(sha256sum ./release/resources.zip | sed -E 's/\s(.*)//;t;d')\"," >> ./work/repository.json
 echo "		\"update_time_utc\": \"$(date -u +"%F %T")\"," >> ./work/repository.json
-echo "		\"update_timestamp\": \"$(date -u +"%s")\"," >> ./work/repository.json
+echo "		\"update_timestamp\": $(date -u +"%s")," >> ./work/repository.json
 echo "		\"url\": \"https://archive.muonpi.org/kicad/resources.zip\"" >> ./work/repository.json
 echo "	}" >> ./work/repository.json
 echo "}" >> ./work/repository.json
